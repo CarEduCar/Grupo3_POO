@@ -1,7 +1,9 @@
+package Classes;
+
 import java.time.LocalDate;
 import java.time.Period;
 
-public class Dependente extends Pessoa{
+public class Dependente extends Pessoa {
     protected Parentesco parentesco;
 
     public Dependente(LocalDate dataNascimento, String cpf, String nome, Parentesco parentesco) {

@@ -1,6 +1,6 @@
+package Classes;
+
 import java.time.LocalDate;
-import java.time.Period;
-import java.util.Date;
 
 public abstract class Pessoa {
     protected String nome;
