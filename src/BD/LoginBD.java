@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public class LoginBD {
 
-    public Connection LoginBd(String usuario,String senha) {
+    public Connection LoginBD(String usuario,String senha) {
         System.out.println("Conectando no banco de dados.....");
         try {
             return DriverManager.getConnection("jdbc:postgresql://localhost:5432/curso", usuario, senha);
