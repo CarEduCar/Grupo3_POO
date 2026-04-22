@@ -3,9 +3,10 @@ package Classes;
 import java.time.LocalDate;
 
 public abstract class Pessoa {
-    protected String nome;
-    protected String cpf;
-    protected LocalDate dataNascimento;
+    private int id;
+    private String nome;
+    private String cpf;
+    private LocalDate dataNascimento;
 
     public Pessoa(LocalDate dataNascimento, String cpf, String nome) {
        if(cpf == null){
@@ -32,11 +33,17 @@ public abstract class Pessoa {
                 cpf.substring(9,11);
     }
 
+    // Getters
     public String getCpf() {
         return cpf;
     }
-
     public LocalDate getDataNascimento() {
         return dataNascimento;
+    }
+    public int getId() { return this.id; }
+
+    // Setters
+    public void setId(int id){
+        this.id = id;
     }
 }
