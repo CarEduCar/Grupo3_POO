@@ -16,6 +16,10 @@ public class Funcionario extends Pessoa {
         dependente = new ArrayList<>();
     }
 
+    public double getSalarioBruto() {
+        return salarioBruto;
+    }
+
     public double calcularINSS(double salario) {
         if (salario <= 1518.00) {
             return salario * 0.075;
@@ -52,4 +56,6 @@ public class Funcionario extends Pessoa {
         double ir = calcularIR(salarioBruto, dependentes);
         return salarioBruto - inss - ir;
     }
+
+
 }
