@@ -1,4 +1,6 @@
-public class DependenteException extends RuntimeException {
+package Exceptions;
+
+public class DependenteException extends Exception {
     public DependenteException(String message) {
         super(message);
     }
