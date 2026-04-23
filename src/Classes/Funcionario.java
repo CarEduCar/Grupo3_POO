@@ -9,14 +9,14 @@ public class Funcionario extends Pessoa {
     private double salarioBruto;
     //private double descontoInss;
     //private double descontoIR;
-    private List<Dependente> dependente = new ArrayList<>();
+    private List<Dependente> dependentes;
     private int id;
 
     // Construtor ↓
     public Funcionario(LocalDate dataNascimento, String cpf, String nome, double salarioBruto) {
         super(dataNascimento, cpf, nome);
         this.salarioBruto = salarioBruto;
-        dependente = new ArrayList<>();
+        dependentes = new ArrayList<>();
 
         //Validações de segurança ↓
         if(this.salarioBruto <= 0.0) throw new IllegalArgumentException("Salário não pode ser <= que 0!");
@@ -31,10 +31,13 @@ public class Funcionario extends Pessoa {
         if(idade < 0 || idade > 120) throw new IllegalArgumentException
                 ("Data de nascimento inválida (Fora da faixa válida 'MENOR que 0 ou MAIOR que 120 anos'!");
     }
+    public void adicionarDP(Dependente dependente){
+        dependentes.add(dependente);
+    }
 
     // Getters ↓
     public double getSalarioBruto(){ return this.salarioBruto; }
-    public List<Dependente> getDependente(){ return this.dependente; }
+    public List<Dependente> getDependente(){ return this.dependentes; }
     public int getId() {
         return id;
     }
@@ -49,7 +52,7 @@ public class Funcionario extends Pessoa {
                     .append("\nSalário Bruto: R$ ")
                     .append(String.format("%,.2f", salarioBruto))
                     .append("\nDependentes: ")
-                    .append(dependente.size());
+                    .append(dependentes.size());
         return sb.toString();
     }
 }
