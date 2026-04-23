@@ -25,14 +25,19 @@ public class InputFile{
             LocalDate data_nascF = LocalDate.parse(dataStrF, formatarData);
             Double salario = Double.parseDouble(particoesFuncionario[3]);
 
+            Funcionario funcionario= new Funcionario(data_nascF, cpfF,nomeF, salario);
             while(!((linha = br.readLine()).isEmpty())){
                 String[] particoesDependente = linha.split(";");
                 String nomeD = particoesFuncionario[0];
                 String cpfD = particoesFuncionario[1];
                 String dataStrD = particoesFuncionario[2];
                 LocalDate data_nascD = LocalDate.parse(dataStrD, formatarData);
-                String parente = particoesDependente[3];
+                String parente = particoesDependente[3].toUpperCase();
+                Parentesco parentesco = Parentesco.valueOf(parente);
+
+                Dependente dependente= new Dependente(data_nascD, cpfD, nomeD, parentesco);
             }
+
         }
     }
 }
