@@ -32,3 +32,8 @@ bin/
 ## Java ##
 .idea/
 TRBL_Grupo3_POO.iml
+
+production/
+*.CSV
+*.class
+.idea/
