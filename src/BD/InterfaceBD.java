@@ -4,20 +4,17 @@ import Classes.Dependente;
 import Classes.Funcionario;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 public interface InterfaceBD {
 
+    Connection loginBD(String usuario, String senha) throws SQLException;
 
-    Connection LoginBD(String usuario, String senha);
+    void fecharBD (Connection conexao) throws SQLException;
 
-    Connection FecharBD(Connection conexao);
+    void inserirFuncionario(Funcionario funcionario) throws SQLException;
 
-    Integer IdFuncionario(Funcionario funcionario);
+    void inserirDependente(Funcionario funcionario, Dependente dependente) throws SQLException;
 
-    Integer IdDependente(Dependente dependente);
-
-    Connection InserirFuncionario(Funcionario funcionario);
-
-    Connection InserirDependente(Funcionario funcionario, Dependente dependente);
-
+    void deletarDependente(Dependente dependente) throws SQLException;
 }
