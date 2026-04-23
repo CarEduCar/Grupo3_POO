@@ -15,7 +15,7 @@ import java.util.List;
 
 public class InputFile{
 
-    public void leitorCSV (String caminho) throws IOException, DependenteException {
+    public List<Funcionario> leitorCSV (String caminho) throws IOException, DependenteException {
         BufferedReader br = new BufferedReader(new FileReader(caminho));
         String linha;
         DateTimeFormatter formatarData = DateTimeFormatter.ofPattern("yyyyMMdd");
@@ -49,5 +49,6 @@ public class InputFile{
                 Dependente dependente= new Dependente(data_nascD, cpfD, nomeD, parentesco);
             }
         }
+        return listaFuncionarios;
     }
 }
