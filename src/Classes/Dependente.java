@@ -19,9 +19,26 @@ public class Dependente extends Pessoa {
         if (idade >= 18){
             throw new DependenteException("O dependente deve ter menos de 18 anos.");
         }
+
+        if (getDataNascimento() == null) {
+            throw new DependenteException("Data de nascimento do dependente não pode ser nula.");
+        }
+
+        if (parentesco == null) {
+            throw new DependenteException(
+                    "Parentesco do dependente não pode ser nulo. " + "Valores aceitos: Filho, Sobrinho, Outros.");
+        }
     }
 
     // Getters ↓
     public int getId(){ return id; }
     public Parentesco getParentesco() { return parentesco; }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setParentesco(Parentesco parentesco) {
+        this.parentesco = parentesco;
+    }
 }
