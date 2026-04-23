@@ -35,12 +35,12 @@ public class BancoDeDados implements InterfaceBD{
             stmt.setObject(2, dependente.getDataNascimento());
             stmt.setString(3, dependente.getCpf());
             stmt.setDouble(4, funcionario.getId());
-            stmt.setDouble(4, dependente.getParentesco());
+            stmt.setObject(4, dependente.getParentesco());
             stmt.executeUpdate();
 
             try (ResultSet rs = stmt.getGeneratedKeys()){
                 if (rs.next()) {
-                    dependente.setID = rs.getInt(1);
+                    dependente.setId(rs.getInt(1));
                 }
             }
         }
@@ -59,16 +59,16 @@ public class BancoDeDados implements InterfaceBD{
 
             try (ResultSet rs = stmt.getGeneratedKeys()) {
                 if (rs.next()) {
-                    funcionario.setId = rs.getInt(1);
+                    funcionario.setId(rs.getInt(1));
                 }
             }
         }
     }
 
     public void deletarDependente (Dependente dependente) throws SQLException {
-        String sql = "DELETE FROM dependente WHERE id_depente = ?";
+        String sql = "DELETE FROM dependente WHERE id_dependente = ?";
         PreparedStatement stmt = conexao.prepareStatement(sql);
-        stmt.setString(1, dependente.getId);
+        stmt.setInt(1, dependente.getId());
         stmt.execute();
     }
 
