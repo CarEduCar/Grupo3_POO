@@ -47,6 +47,7 @@ public class InputFile{
                 Parentesco parentesco = Parentesco.valueOf(parente);
 
                 Dependente dependente= new Dependente(data_nascD, cpfD, nomeD, parentesco);
+                funcionario.adicionarDP(dependente);
             }
         }
         return listaFuncionarios;
