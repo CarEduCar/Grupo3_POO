@@ -58,4 +58,25 @@ public class FolhaPagamento {
         salarioLiquido = salarioBruto - descontoINSS - descontoIR;
         return this.salarioLiquido;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("=== FOLHA DE PAGAMENTO ===\n")
+                .append("Funcionário  : ")
+                .append(funcionario.getNome())
+                .append("\nCPF: ")
+                .append(funcionario.getCpf())
+                .append("\nData: ")
+                .append(dataPagamento)
+                .append("\nSalário Bruto: R$")
+                .append(String.format("%,.2f", funcionario.getSalarioBruto()))
+                .append("\nDesconto INSS: R$ ")
+                .append(String.format("%,.2f", descontoINSS))
+                .append("\nDesconto IR  : R$")
+                .append(String.format("%,.2f", descontoIR))
+                .append("\nSalário Líquido : R$")
+                .append(String.format("%,.2f", salarioLiquido));
+        return sb.toString();
+    }
 }

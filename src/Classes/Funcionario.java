@@ -38,4 +38,18 @@ public class Funcionario extends Pessoa {
     public int getId() {
         return id;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+            sb.append("Funcionário: ")
+                    .append(getNome())
+                    .append("\nCPF: ")
+                    .append(getCpf())
+                    .append("\nSalário Bruto: R$ ")
+                    .append(String.format("%,.2f", salarioBruto))
+                    .append("\nDependentes: ")
+                    .append(dependente.size());
+        return sb.toString();
+    }
 }
