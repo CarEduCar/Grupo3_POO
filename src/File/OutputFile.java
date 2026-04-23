@@ -1,4 +1,4 @@
-package Classes;
+package File;
 public class OutputFile {
 
     //Construtor ↓
