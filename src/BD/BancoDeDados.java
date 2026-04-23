@@ -14,6 +14,8 @@ public class BancoDeDados implements InterfaceBD {
         this.conexao = conexao;
     }
 
+    // --- --- FUNÇÕES DE CONEXÃO COM O BANCO DE DADOS --- ---
+
     public Connection loginBD(String senha) {
         System.out.println("Conectando no banco de dados.....");
         try {
@@ -30,12 +32,11 @@ public class BancoDeDados implements InterfaceBD {
         }
     }
 
-    // --- MÉTODOS DE FUNCIONÁRIO ---
+    // --- --- MÉTODOS DE FUNCIONÁRIO --- ---
 
     public void inserirFuncionario(Funcionario funcionario) throws SQLException {
         String sql = "INSERT INTO funcionario (nome, data_nasc, CPF, salario_bruto) VALUES (?, ?, ?, ?)";
 
-        // Avisa que quer a chave de volta!
         try (PreparedStatement stmt = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, funcionario.getNome());
             stmt.setObject(2, funcionario.getDataNascimento());
@@ -57,12 +58,12 @@ public class BancoDeDados implements InterfaceBD {
 
         try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
             stmt.setString(1, status);
-            stmt.setInt(2, funcionario.getId()); // Usamos setInt para ID
-            stmt.executeUpdate(); // É executeUpdate para UPDATE!
+            stmt.setInt(2, funcionario.getId());
+            stmt.executeUpdate();
         }
     }
 
-    // --- MÉTODOS DE DEPENDENTE ---
+    // --- --- MÉTODOS DE DEPENDENTE --- ---
 
     public void inserirDependente(Funcionario funcionario, Dependente dependente) throws SQLException {
         String sql = "INSERT INTO dependente (nome, data_nasc, CPF, id_funcionario, parentesco) VALUES (?, ?, ?, ?, ?)";
