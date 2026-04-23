@@ -1,6 +1,7 @@
 package BD;
 
 import Classes.Dependente;
+import Classes.FolhaPagamento;
 import Classes.Funcionario;
 
 import java.sql.Connection;
@@ -8,13 +9,25 @@ import java.sql.SQLException;
 
 public interface InterfaceBD {
 
-    Connection loginBD(String usuario, String senha) throws SQLException;
+    // --- --- FUNÇÕES DE CONEXÃO COM O BANCO DE DADOS --- ---
 
-    void fecharBD (Connection conexao) throws SQLException;
+    Connection loginBD(String senha) throws SQLException;
+
+    void fecharBD () throws SQLException;
+
+    // --- --- MÉTODOS DE FUNCIONÁRIO --- ---
 
     void inserirFuncionario(Funcionario funcionario) throws SQLException;
 
+    void atualizarStatusFuncionario(Funcionario funcionario, String status) throws SQLException ;
+
+    // --- --- MÉTODOS DE DEPENDENTE --- ---
+
     void inserirDependente(Funcionario funcionario, Dependente dependente) throws SQLException;
 
-    void deletarDependente(Dependente dependente) throws SQLException;
+    void retirarDependente (Dependente dependente) throws SQLException;
+
+    // --- --- MÉTODOS DE FOLHA DE PAGAMENTO --- ---
+
+    void criarFolhaPagamento(FolhaPagamento pagamento) throws SQLException;
 }
