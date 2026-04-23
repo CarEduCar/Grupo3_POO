@@ -47,8 +47,11 @@ public class FolhaPagamento {
         }
     }
 
-    // Calculo do salário líquido.
-    public double getSalarioLiquido() {
+    // Getter ↓
+    public double getDescontoINSS() { return descontoINSS; }
+    public double getDescontoIR() { return descontoIR; }
+    public Funcionario getFuncionario() { return funcionario; }
+    public double getSalarioLiquido() { // Calculo do salário líquido e retorno do Get
         double salarioBruto = funcionario.getSalarioBruto();
         int dependentes = funcionario.getDependente().size();
 
