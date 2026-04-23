@@ -2,7 +2,7 @@ package Classes;
 import java.time.LocalDate;
 
 public class FolhaPagamento {
-    //private int id;
+    private int id;
     private Funcionario funcionario;
     private LocalDate dataPagamento;
     private double descontoINSS;
@@ -48,6 +48,7 @@ public class FolhaPagamento {
     }
 
     // Getter ↓
+    public LocalDate getDataPagamento(){ return this.dataPagamento; }
     public double getDescontoINSS() { return descontoINSS; }
     public double getDescontoIR() { return descontoIR; }
     public Funcionario getFuncionario() { return funcionario; }
@@ -62,6 +63,10 @@ public class FolhaPagamento {
         return this.salarioLiquido;
     }
 
+    // Getter ↓
+    public void setId(int id){ this.id = id; }
+
+    
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
