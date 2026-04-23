@@ -20,15 +20,15 @@ public class OutputFile {
             //Cria uma instancia de Funcionario.
             Funcionario funcionario = folha.getFuncionario();
 
-            folha.getSalarioLiquido(); // Aqui a função é chamada para alimentar as variáveis DescontoINSS e DescontoIR previamente.
+            double salarioLiquido = folha.getSalarioLiquido(); // Aqui a função é chamada para alimentar as variáveis DescontoINSS e DescontoIR previamente.
 
             //Monta toda a estrutura da String.
-            String linha = String.format("%s;%s;%f;%f;%f",
+            String linha = String.format("%s;%s;%.2f;%.2f;%.2f",
                     funcionario.getNome(),
                     funcionario.getCpf(),
                     folha.getDescontoINSS(),
                     folha.getDescontoIR(),
-                    folha.getSalarioLiquido());
+                    salarioLiquido);
 
             writer.println(linha); //Imprimi no arquivo
             System.out.println("Arquivo CSV criado com Sucesso!");
