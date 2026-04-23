@@ -1,60 +1,47 @@
 package BD;
 
 import Classes.Dependente;
+import Classes.FolhaPagamento;
 import Classes.Funcionario;
 
 import java.sql.*;
 
-public class BancoDeDados implements InterfaceBD{
+public class BancoDeDados implements InterfaceBD {
+
     private Connection conexao;
 
-    public Connection connection(Connection connection){
-        return this.conexao = connection;
+    public BancoDeDados(Connection conexao) {
+        this.conexao = conexao;
     }
 
-    public Connection loginBD(String usuario,String senha) {
+    public Connection loginBD(String senha) {
         System.out.println("Conectando no banco de dados.....");
         try {
-            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/curso", usuario, senha);
+            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/curso", "postgres", senha);
         } catch (SQLException e) {
             System.err.println("Não foi possível conectar...");
             return null;
         }
     }
 
-    public void fecharBD(Connection conexao) throws SQLException {
-        conexao.close();
-    }
-
-    public void inserirDependente (Funcionario funcionario, Dependente dependente) throws SQLException {
-        String sql = "INSERT INTO funcionario (nome, data_nasc, CPF, id_funcionario, parentesco)" +
-                "VALUES (?, ?, ?, ?)";
-
-        try(PreparedStatement stmt = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
-            stmt.setString(1, dependente.getNome());
-            stmt.setObject(2, dependente.getDataNascimento());
-            stmt.setString(3, dependente.getCpf());
-            stmt.setDouble(4, funcionario.getId());
-            stmt.setObject(4, dependente.getParentesco());
-            stmt.executeUpdate();
-
-            try (ResultSet rs = stmt.getGeneratedKeys()){
-                if (rs.next()) {
-                    dependente.setId(rs.getInt(1));
-                }
-            }
+    public void fecharBD() throws SQLException {
+        if (conexao != null && !conexao.isClosed()) {
+            conexao.close();
         }
     }
 
-    public void inserirFuncionario (Funcionario funcionario) throws SQLException {
-        String sql = "INSERT INTO funcionario (nome, data_nasc, CPF, salario_bruto)" +
-                "VALUES (?, ?, ?, ?)";
+    // --- MÉTODOS DE FUNCIONÁRIO ---
 
-        try(PreparedStatement stmt = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+    public void inserirFuncionario(Funcionario funcionario) throws SQLException {
+        String sql = "INSERT INTO funcionario (nome, data_nasc, CPF, salario_bruto) VALUES (?, ?, ?, ?)";
+
+        // Avisa que quer a chave de volta!
+        try (PreparedStatement stmt = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, funcionario.getNome());
             stmt.setObject(2, funcionario.getDataNascimento());
             stmt.setString(3, funcionario.getCpf());
             stmt.setDouble(4, funcionario.getSalarioBruto());
+
             stmt.executeUpdate();
 
             try (ResultSet rs = stmt.getGeneratedKeys()) {
@@ -65,12 +52,66 @@ public class BancoDeDados implements InterfaceBD{
         }
     }
 
-    public void deletarDependente (Dependente dependente) throws SQLException {
-        String sql = "DELETE FROM dependente WHERE id_dependente = ?";
-        PreparedStatement stmt = conexao.prepareStatement(sql);
-        stmt.setInt(1, dependente.getId());
-        stmt.execute();
+    public void atualizarStatusFuncionario(Funcionario funcionario, String status) throws SQLException {
+        String sql = "UPDATE funcionario SET situacao = ? WHERE id_funcionario = ?";
+
+        try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
+            stmt.setString(1, status);
+            stmt.setInt(2, funcionario.getId()); // Usamos setInt para ID
+            stmt.executeUpdate(); // É executeUpdate para UPDATE!
+        }
     }
 
+    // --- MÉTODOS DE DEPENDENTE ---
 
+    public void inserirDependente(Funcionario funcionario, Dependente dependente) throws SQLException {
+        String sql = "INSERT INTO dependente (nome, data_nasc, CPF, id_funcionario, parentesco) VALUES (?, ?, ?, ?, ?)";
+
+        try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
+            stmt.setString(1, dependente.getNome());
+            stmt.setObject(2, dependente.getDataNascimento());
+            stmt.setString(3, dependente.getCpf());
+            stmt.setInt(4, funcionario.getId());
+            stmt.setObject(5, dependente.getParentesco());
+
+            stmt.executeUpdate();
+
+            try (ResultSet rs = stmt.getGeneratedKeys()) {
+                if (rs.next()) {
+                    dependente.setId(rs.getInt(1));
+                }
+            }
+        }
+    }
+
+    public void retirarDependente(Dependente dependente) throws SQLException {
+        String sql = "DELETE FROM dependente WHERE id_dependente = ?";
+
+        try (PreparedStatement stmt = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            stmt.setInt(1, dependente.getId());
+            stmt.execute();
+        }
+    }
+
+    // --- --- MÉTODOS DE FOLHA DE PAGAMENTO --- ---
+
+    public void criarFolhaPagamento(FolhaPagamento pagamento) throws SQLException {
+        String sql = "INSERT INTO folha_de_pagamento (data_pagamento, descontoINSS, descontoIR, salario_Liquido, id_funcionario) VALUES (?, ?, ?, ?, ?)";
+
+        try (PreparedStatement stmt = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            stmt.setObject(1, pagamento.getDataPagamento());
+            stmt.setDouble(2, pagamento.getDescontoINSS());
+            stmt.setDouble(3, pagamento.getDescontoIR());
+            stmt.setDouble(4, pagamento.getSalarioLiquido());
+            stmt.setInt(5, pagamento.getFuncionario().getId());
+
+            stmt.executeUpdate();
+
+            try (ResultSet rs = stmt.getGeneratedKeys()) {
+                if (rs.next()) {
+                    pagamento.setId(rs.getInt(1));
+                }
+            }
+        }
+    }
 }
