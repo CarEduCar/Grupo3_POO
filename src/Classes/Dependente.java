@@ -24,4 +24,12 @@ public class Dependente extends Pessoa {
     // Getters ↓
     public int getId(){ return id; }
     public Parentesco getParentesco() { return parentesco; }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setParentesco(Parentesco parentesco) {
+        this.parentesco = parentesco;
+    }
 }
