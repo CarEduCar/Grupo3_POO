@@ -20,7 +20,7 @@ public class BancoDeDados implements InterfaceBD {
         System.out.println("Conectando no banco de dados.....");
         try {
             // Alterei de "curso" para "poo_grupo3"
-            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/poo_grupo3", "postgres", senha);
+            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/poo_grupo3?currentSchema=poo_grupo3", "postgres", senha);
         } catch (SQLException e) {
             System.err.println("Não foi possível conectar...");
             return null;
@@ -74,7 +74,7 @@ public class BancoDeDados implements InterfaceBD {
             stmt.setObject(2, dependente.getDataNascimento());
             stmt.setString(3, dependente.getCpf());
             stmt.setInt(4, funcionario.getId());
-            stmt.setObject(5, dependente.getParentesco());
+            stmt.setString(5, dependente.getParentesco().name());
 
             stmt.executeUpdate();
 
