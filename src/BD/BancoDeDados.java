@@ -69,7 +69,7 @@ public class BancoDeDados implements InterfaceBD {
     public void inserirDependente(Funcionario funcionario, Dependente dependente) throws SQLException {
         String sql = "INSERT INTO dependente (nome, data_nasc, CPF, id_funcionario, parentesco) VALUES (?, ?, ?, ?, ?)";
 
-        try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
+        try (PreparedStatement stmt = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, dependente.getNome());
             stmt.setObject(2, dependente.getDataNascimento());
             stmt.setString(3, dependente.getCpf());

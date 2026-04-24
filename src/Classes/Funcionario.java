@@ -10,7 +10,6 @@ public class Funcionario extends Pessoa {
     //private double descontoInss;
     //private double descontoIR;
     private List<Dependente> dependentes;
-    private int id;
 
     // Construtor ↓
     public Funcionario(LocalDate dataNascimento, String cpf, String nome, double salarioBruto) {
@@ -38,9 +37,6 @@ public class Funcionario extends Pessoa {
     // Getters ↓
     public double getSalarioBruto(){ return this.salarioBruto; }
     public List<Dependente> getDependente(){ return this.dependentes; }
-    public int getId() {
-        return id;
-    }
 
     @Override
     public String toString() {
