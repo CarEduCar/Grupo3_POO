@@ -7,7 +7,6 @@ import java.time.Period;
 
 public class Dependente extends Pessoa {
     private Parentesco parentesco;
-    private int id;
 
     public Dependente(LocalDate dataNascimento, String cpf, String nome, Parentesco parentesco)
             throws DependenteException {
@@ -31,12 +30,10 @@ public class Dependente extends Pessoa {
     }
 
     // Getters ↓
-    public int getId(){ return id; }
+
     public Parentesco getParentesco() { return parentesco; }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+
 
     public void setParentesco(Parentesco parentesco) {
         this.parentesco = parentesco;
