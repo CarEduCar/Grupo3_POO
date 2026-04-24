@@ -37,18 +37,4 @@ public class Funcionario extends Pessoa {
     // Getters ↓
     public double getSalarioBruto(){ return this.salarioBruto; }
     public List<Dependente> getDependente(){ return this.dependentes; }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-            sb.append("Funcionário: ")
-                    .append(getNome())
-                    .append("\nCPF: ")
-                    .append(getCpf())
-                    .append("\nSalário Bruto: R$ ")
-                    .append(String.format("%,.2f", salarioBruto))
-                    .append("\nDependentes: ")
-                    .append(dependentes.size());
-        return sb.toString();
-    }
 }
