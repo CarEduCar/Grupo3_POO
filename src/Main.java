@@ -36,8 +36,6 @@ public class Main {
             conexao = helper.loginBD(senhaBD);
 
             if (conexao == null) {
-                // TODO: Verificar possibilidade de manter essa mensagem ou a do banco de dados
-                System.err.println("Falha crítica: Não foi possível conectar ao banco.");
                 return;
             }
 
