@@ -4,7 +4,6 @@ import Classes.Funcionario;
 import Classes.Dependente;
 import File.InputFile;
 import File.OutputFile;
-
 import java.sql.Connection;
 import java.util.List;
 import java.util.Scanner;
@@ -17,10 +16,10 @@ public class Main {
 
         // 1. Início: Pedir nomes dos arquivos via console
         System.out.println("===== SISTEMA DE FOLHA DE PAGAMENTO =====");
-        System.out.print("Digite o caminho do arquivo de ENTRADA (CSV): ");
+        System.out.print("Digite o nome do arquivo de entrada: ");
         String caminhoInput = teclado.nextLine();
 
-        System.out.print("Digite o caminho do arquivo de SAÍDA (CSV): ");
+        System.out.print("Digite o nome do arquivo de saída: ");
         String caminhoOutput = teclado.nextLine();
 
         // Senha do banco
@@ -37,6 +36,7 @@ public class Main {
             conexao = helper.loginBD(senhaBD);
 
             if (conexao == null) {
+                // TODO: Verificar possibilidade de manter essa mensagem ou a do banco de dados
                 System.err.println("Falha crítica: Não foi possível conectar ao banco.");
                 return;
             }

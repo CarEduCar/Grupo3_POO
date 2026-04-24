@@ -16,7 +16,8 @@ public class OutputFile {
     //Metodo que recebe a folha de pagamento e um nome para o arquivo de saída CSV
     public void processarFolha(FolhaPagamento folha, String nomeArquivo){
         Locale padraoBR = new Locale("pt", "BR"); //Aqui garante o uso da virgula.
-        try(PrintWriter writer = new PrintWriter(new FileWriter(nomeArquivo))){
+        // Adicionamos um 'true' na linha 20
+        try(PrintWriter writer = new PrintWriter(new FileWriter(nomeArquivo, true))) {
             //Cria uma instancia de Funcionario.
             Funcionario funcionario = folha.getFuncionario();
 
