@@ -19,7 +19,8 @@ public class BancoDeDados implements InterfaceBD {
     public Connection loginBD(String senha) {
         System.out.println("Conectando no banco de dados.....");
         try {
-            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/curso", "postgres", senha);
+            // Alterei de "curso" para "poo_grupo3"
+            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/poo_grupo3", "postgres", senha);
         } catch (SQLException e) {
             System.err.println("Não foi possível conectar...");
             return null;
